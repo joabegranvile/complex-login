@@ -1,0 +1,32 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:16
+    container_name: psql_db
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: nestdb
+      POSTGRES_USER: nestuser
+      POSTGRES_PASSWORD: nestpass
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  nest:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nest_app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgres://nestuser:nestpass@db:5432/nestdb
+    depends_on:
+      - db
+
+volumes:
+  pgdata:
+    driver: local
