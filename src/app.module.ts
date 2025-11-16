@@ -23,7 +23,7 @@ import { KnexModule } from 'nestjs-knex';
         config: {
           client: 'pg',
           connection: {
-            host: 'db',
+            host: 'localhost',
             port: 5432,
             user: 'nestuser',
             password: 'nestpass',
