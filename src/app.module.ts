@@ -11,19 +11,21 @@ import { RolesGuard } from './auth/guards/roles.guard';
 import { CaslModule } from './casl/casl.module';
 import { CacheInterceptor, CacheModule } from '@nestjs/cache-manager';
 import { KnexModule } from 'nestjs-knex';
+import { MetricsModule } from './metrics/metrics.module';
 
 @Module({
   imports: [
     AuthModule,
     UsersModule,
     CaslModule,
+    MetricsModule,
     CacheModule.register({ isGlobal: true }),
     KnexModule.forRootAsync({
       useFactory: () => ({
         config: {
           client: 'pg',
           connection: {
-            host: 'localhost',
+            host: 'db',
             port: 5432,
             user: 'nestuser',
             password: 'nestpass',
