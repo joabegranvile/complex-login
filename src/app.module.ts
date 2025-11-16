@@ -21,13 +21,13 @@ import { KnexModule } from 'nestjs-knex';
     KnexModule.forRootAsync({
       useFactory: () => ({
         config: {
-          client: 'psql',
+          client: 'pg',
           connection: {
-            host: 'localhost',
-            port: 3306,
-            user: 'root',
-            password: 'root',
-            database: 'nest',
+            host: 'db',
+            port: 5432,
+            user: 'nestuser',
+            password: 'nestpass',
+            database: 'nestdb',
           },
         },
       }),
